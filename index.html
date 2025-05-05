@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Health Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #f4f4f4;
+    }
+    #login-container, #user-container, #health-form, #date-range-selector, #history-container, #chart-container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-top: 2rem;
+    }
+    input, button, select {
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.5rem;
+    }
+    #user-container, #health-form, #date-range-selector, #history-container, #chart-container {
+      display: none;
+    }
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="login-container">
+    <h2>Login / Signup</h2>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <button onclick="signup()">Signup</button>
+  </div>
+
+  <div id="user-container">
+    <h2>Welcome!</h2>
+    <p id="user-email"></p>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <div id="health-form">
+    <h3>Enter Today’s Health Data</h3>
+
+    <label for="entry-date">Date:</label>
+    <input type="date" id="entry-date" required>
+
+    <label for="meal-time">What did the patient eat?</label>
+    <select id="meal-time" required>
+      <option value="">Select a time</option>
+      <option value="morning">Morning</option>
+      <option value="noon">Noon</option>
+      <option value="evening">Evening</option>
+      <option value="night">Night</option>
+    </select>
+
+    <label for="meal-description">What exactly did the patient eat?</label>
+    <input type="text" id="meal-description" placeholder="e.g., 2 boiled eggs and toast">
+
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight" step="0.1">
+
+    <label for="bp">Blood Pressure:</label>
+    <input type="text" id="bp">
+
+    <label for="sugar">Blood Sugar:</label>
+    <input type="number" id="sugar">
+
+    <button onclick="saveHealthData()">Save</button>
+  </div>
+
+  <div id="date-range-selector">
+    <h3>History Options</h3>
+    <label for="from-date">From:</label>
+    <input type="date" id="from-date">
+
+    <label for="to-date">To:</label>
+    <input type="date" id="to-date">
+
+    <button onclick="loadHealthHistoryByDate()">View Table of Entries</button>
+    <button onclick="showProgressGraph()">View Progress Graph</button>
+  </div>
+
+  <div id="history-container">
+    <h2>Health Entry History</h2>
+    <ul id="history-list"></ul>
+  </div>
+
+  <div id="chart-container">
+    <h2>Progress Graph</h2>
+    <canvas id="progressChart"></canvas>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
